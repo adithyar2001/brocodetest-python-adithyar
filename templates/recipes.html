@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes</title>
+    <style>
+        li{
+            padding: 10px;
+            margin-bottom: 10px;
+            width: fit-content;
+            border: 1px solid black;
+            border-radius: 10px;
+        }
+        h2{
+            text-decoration: underline;
+
+        }
+        *{
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Recipes</h1>
+    
+    <ul>
+        {% for recipe in recipes %}
+            <li>
+                <h2>{{recipe.name}}</h2>
+                <p><b>Ingredients:</b> {{recipe.ingredients}}</p>
+                <p><b>Categories:</b>
+                    {% for category in recipe.categories.all %}
+                        {{ category.name }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+            </li>
+        {% empty %}
+            <li>No recipes are available, add your recipes.</li>
+        {% endfor %}
+    </ul>
+    <a href="/">back</a>
+</body>
+</html>
